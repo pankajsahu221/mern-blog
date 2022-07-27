@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Topbar.css";
 
 const topbar = () => {
+  const user = false;
   return (
     <div className="top">
       <div className="topLeft">
@@ -12,19 +14,51 @@ const topbar = () => {
       </div>
       <div className="topCenter">
         <ul className="topList">
-          <div className="topListItem">HOME</div>
-          <div className="topListItem">ABOUT</div>
-          <div className="topListItem">CONTACT</div>
-          <div className="topListItem">WRITE</div>
-          <div className="topListItem">LOGOUT</div>
+          <div className="topListItem">
+            <Link to="/" className="link">
+              HOME
+            </Link>
+          </div>
+          <div className="topListItem">
+            <Link to="/about" className="link">
+              ABOUT
+            </Link>
+          </div>
+          <div className="topListItem">
+            <Link to="/about" className="link">
+              ABOUT
+            </Link>
+          </div>
+          <div className="topListItem">
+            <Link to="/about" className="link">
+              ABOUT
+            </Link>
+          </div>
+          <div className="topListItem">{user && "LOGOUT"}</div>
         </ul>
       </div>
       <div className="topRight">
-        <img
-          className="topImg"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR5J7EtV_G5EXmTehZdvEwS78bhOxH7owj5WmTdGUsi926XogrKlM8Oza4qr4VafWVKGY&usqp=CAU"
-          alt=""
-        />
+        {user ? (
+          <img
+            className="topImg"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR5J7EtV_G5EXmTehZdvEwS78bhOxH7owj5WmTdGUsi926XogrKlM8Oza4qr4VafWVKGY&usqp=CAU"
+            alt=""
+          />
+        ) : (
+          <ul className="topList">
+            <div className="topListItem">
+              <Link to="/login" className="link">
+                LOGIN
+              </Link>
+            </div>
+            <div className="topListItem">
+              <Link to="/register" className="link">
+                REGISTER
+              </Link>
+            </div>
+          </ul>
+        )}
+
         <i className="topSearchIcon fa-solid fa-magnifying-glass"></i>
       </div>
     </div>

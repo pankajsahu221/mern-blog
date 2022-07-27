@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Register.css";
 
 const Register = () => {
@@ -26,7 +27,11 @@ const Register = () => {
         />
         <button className="registerButton">Register</button>
       </form>
-      <button className="registerLoginButton">Login</button>
+      <button className="registerLoginButton">
+        <Link to="/login" className="link">
+          Login
+        </Link>
+      </button>
     </div>
   );
 };
