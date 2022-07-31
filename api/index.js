@@ -2,8 +2,14 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const authRoute = require("./routes/auth");
 
 dotenv.config();
+const PORT = process.env.PORT || 8000;
+
+// to use bodyparser
+app.use(express.json());
+app.use(express.urlencoded());
 
 // MONGODB connection
 mongoose
@@ -14,10 +20,8 @@ mongoose
   .then(console.log("Connected to the database"))
   .catch((e) => console.log(e));
 
-app.use("/", (req, res) => {
-  res.send("hey this is main");
-});
+app.use("/api/auth", authRoute);
 
-app.listen("8000", () => {
+app.listen(PORT, () => {
   console.log("Server is running.");
 });
