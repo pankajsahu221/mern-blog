@@ -89,7 +89,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// GET ALL POSTS
+// GET ALL POSTS - localhost:8000/api/posts/?user=johnyyuuu
 router.get("/", async (req, res) => {
   const username = req.query.user;
   const catName = req.query.cat;
