@@ -11,6 +11,9 @@ const multer = require("multer");
 dotenv.config();
 const PORT = process.env.PORT || 8000;
 
+var cors = require("cors");
+app.use(cors());
+
 // to use bodyparser
 app.use(express.json());
 app.use(express.urlencoded());

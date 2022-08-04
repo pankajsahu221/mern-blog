@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./SinglePost.css";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 
 const SinglePost = () => {
+  const { postId } = useParams();
+  const [post, setPost] = useState({});
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await axios.get(`/posts/${postId}`);
+      setPost(res.data);
+    };
+    getData();
+  }, []);
+
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
-        <img
-          className="singlePostImg"
-          src="https://cdn.britannica.com/49/179449-138-9F4EC401/Overview-Berlin.jpg?w=800&h=450&c=crop"
-          alt=""
-        />
+        <img className="singlePostImg" src={post.photo} alt="" />
         <h1 className="singlePostTitle">
-          Lorem ipsum dolor sit amet
+          {post.title}
           <div className="singlePostEdit">
             <i className="singlePostIcon far fa-edit"></i>
             <i className="singlePostIcon far fa-trash-alt"></i>
@@ -19,29 +28,16 @@ const SinglePost = () => {
         </h1>
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
-            Author: <b>Safak</b>
+            Author:
+            <Link to={`/?user=${post.username}`} className="link">
+              <b>{post.username}</b>
+            </Link>
           </span>
-          <span className="singlePostDate">1 hour ago</span>
+          <span className="singlePostDate">
+            {new Date(post.createdAt).toDateString()}
+          </span>
         </div>
-        <p className="singlePostDesc">
-          Lorem ipsum dolor sit ametLorem ipsum dolor sit amet Lorem ipsum dolor
-          sit ametLorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem
-          ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit
-          amet Lorem ipsum dolor sit ametLorem ipsum dolor sit amet Lorem ipsum
-          dolor sit ametLorem ipsum dolor sit amet Lorem ipsum dolor sit
-          ametLorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum
-          dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit amet
-          Lorem ipsum dolor sit ametLorem ipsum dolor sit amet Lorem ipsum dolor
-          sit ametLorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem
-          ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit
-          amet Lorem ipsum dolor sit ametLorem ipsum dolor sit amet Lorem ipsum
-          dolor sit ametLorem ipsum dolor sit amet Lorem ipsum dolor sit
-          ametLorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum
-          dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit amet
-          Lorem ipsum dolor sit ametLorem ipsum dolor sit amet Lorem ipsum dolor
-          sit ametLorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem
-          ipsum dolor sit amet
-        </p>
+        <p className="singlePostDesc">{post.desc}</p>
       </div>
     </div>
   );

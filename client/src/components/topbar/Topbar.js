@@ -25,13 +25,13 @@ const topbar = () => {
             </Link>
           </div>
           <div className="topListItem">
-            <Link to="/about" className="link">
-              ABOUT
+            <Link to="/contact" className="link">
+              CONTACT
             </Link>
           </div>
           <div className="topListItem">
-            <Link to="/about" className="link">
-              ABOUT
+            <Link to="/write" className="link">
+              WRITE
             </Link>
           </div>
           <div className="topListItem">{user && "LOGOUT"}</div>
