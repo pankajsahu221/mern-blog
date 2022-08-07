@@ -14,13 +14,9 @@ router.post("/register", async (req, res) => {
       password: hashedPassword,
     };
 
-    await User.create(newUser, (err, data) => {
-      if (err) {
-        res.status(500).json(err);
-      } else {
-        res.status(200).json(data);
-      }
-    });
+    const user = await User.create(newUser);
+
+    res.status(500).json(user);
   } catch (e) {
     console.log(e);
     res.status(500).json(e);
@@ -38,11 +34,13 @@ router.post("/login", async (req, res) => {
       foundUser.password
     );
 
-    !validated && res.status(400).json("Wrong credentails");
-
-    // that will store all other values except the password of the foundUser
-    const { password, ...others } = foundUser._doc;
-    res.status(200).json(others);
+    if (!validated) {
+      res.status(400).json("Wrong credentails");
+    } else {
+      // that will store all other values except the password of the foundUser
+      const { password, ...others } = foundUser._doc;
+      res.status(200).json(others);
+    }
   } catch (e) {
     console.log(e);
     res.status(500).json(e);

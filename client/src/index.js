@@ -13,3 +13,10 @@ root.render(
     </ContextProvider>
   </React.StrictMode>
 );
+
+// ReactDOM.render(
+//   <ContextProvider>
+//     <App />
+//   </ContextProvider>,
+//   document.getElementById("root")
+// );
