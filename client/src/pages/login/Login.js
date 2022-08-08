@@ -44,7 +44,7 @@ const Login = () => {
           placeholder="Enter your password"
           ref={passwordRef}
         />
-        <button className="loginButton" type="submit">
+        <button className="loginButton" type="submit" disabled={isFetching}>
           Login
         </button>
       </form>

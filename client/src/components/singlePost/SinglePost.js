@@ -4,6 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 const SinglePost = () => {
+  const PF = "http://localhost:8000/images/";
+
   const { postId } = useParams();
   const [post, setPost] = useState({});
 
@@ -18,7 +20,10 @@ const SinglePost = () => {
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
-        <img className="singlePostImg" src={post.photo} alt="" />
+        {post.photo && (
+          <img className="singlePostImg" src={PF + post.photo} alt="" />
+        )}
+
         <h1 className="singlePostTitle">
           {post.title}
           <div className="singlePostEdit">

@@ -7,12 +7,15 @@ const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts");
 const categoryRoute = require("./routes/categories");
 const multer = require("multer");
+const path = require("path");
 
 dotenv.config();
 const PORT = process.env.PORT || 8000;
 
 var cors = require("cors");
 app.use(cors());
+
+app.use("/images", express.static(path.join(__dirname, "/images")));
 
 // to use bodyparser
 app.use(express.json());
