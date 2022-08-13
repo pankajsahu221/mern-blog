@@ -2,12 +2,13 @@ const router = require("express").Router();
 const User = require("../models/user.model");
 const Post = require("../models/post.model");
 const saltRounds = 10;
+const bcrypt = require("bcrypt");
 
 // UPDATE
 router.put("/:id", async (req, res) => {
   if (req.body.userId === req.params.id) {
     if (req.body.password) {
-      req.body.password = await brcypt.hash(req.body.password, saltRounds);
+      req.body.password = await bcrypt.hash(req.body.password, saltRounds);
     }
 
     try {
